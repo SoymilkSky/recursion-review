@@ -15,33 +15,24 @@
 // if className is found in the document's list -> push into the results array
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
+var getElementsByClassName = function(className) {
   var results = [];
   var body = document.body;
-
-  console.log(body);
-  console.log(body.classList);
-
 
   var nameChecker = function(elements) {
     if (elements.classList !== undefined && elements.classList.contains(className) === true) {
       results.push(elements);
     }
 
-    console.log(elements.childNodes);
     if(elements.hasChildNodes() === true) {
-
-      var childArray = element.childNodes;
-      console.log(childArray)
-      //nameChecker()
+      var childArray = elements.childNodes;
+      for (var i = 0; i < childArray.length; i++) {
+        nameChecker(childArray[i]);
+      }
     }
-
   }
 
   nameChecker(body);
-
-  console.log(results);
 
   return results;
 };
